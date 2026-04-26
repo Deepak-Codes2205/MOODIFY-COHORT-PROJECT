@@ -5,7 +5,13 @@ const blacklistModel = require("../models/blacklist.model")
 const redis = require("../config/cache")
 
 async function registerUser (req,res){
-    const { username, email, password } = req.body
+    const { email, username, password } = req.body
+
+    if (!email || !username || !password) {
+        return res.status(400).json({
+            message: "All fields required"
+        });
+    }
 
     const isAlreadyRegistered = await userModel.findOne({
         $or:[
@@ -50,14 +56,26 @@ async function registerUser (req,res){
 
 
 async function loginUser (req,res){
-    const { username, email, password } = req.body
+    const { identifier, password } = req.body
+    
+    if (!identifier || !password) {
+        return res.status(400).json({
+            message: "All fields required"
+        });
+    }
 
-    const user = await userModel.findOne({
-        $or:[
-            { email },
-            { username }
-        ]
-    }).select("+password")
+    const isEmail = identifier.includes("@");
+
+    const query = isEmail ? { email: identifier } : { username: identifier };
+    
+    const user = await userModel.findOne(query).select("+password");
+
+    // const user = await userModel.findOne({
+    //     $or:[
+    //         { email },
+    //         { username }
+    //     ]
+    // }).select("+password")
 
     if(!user)
     {

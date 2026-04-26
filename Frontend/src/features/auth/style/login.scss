@@ -1,0 +1,47 @@
+.login-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    gap: 2rem;
+
+    .form-container{
+        background-color: rgb(186, 129, 129);
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        min-width: 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        form{
+            display: flex;
+            flex-direction: column;
+        
+            .form-group{
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+
+                label{
+                    font-weight: bold;
+                }
+
+                input{
+                    padding: 0.5rem;
+                    border: none;
+                    outline: none;
+                    border-radius: 4px;
+                    outline: none;
+
+                    &:focus{
+                        border-color: #007bff;
+                    }
+                }
+            }
+        }
+    }
+
+}
