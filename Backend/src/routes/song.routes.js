@@ -11,4 +11,6 @@ const router = express.Router()
  */
 router.post("/", upload.single("song"), songContoller.uploadSong)
 
+router.get("/", songContoller.getSong)
+
 module.exports = router
